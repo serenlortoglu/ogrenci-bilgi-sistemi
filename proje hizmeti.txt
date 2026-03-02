@@ -1,0 +1,103 @@
+                                                          ÖĞRENCİ BİLGİ SİSTEMİ PROJESİ 
+Proje Hizmet Tanımı Ve Kapsamı
+1.Proje Amacı
+ Bu projenin amacı; eğitim kurumlarında öğrenci, öğretmen ve idari  personel arasındaki bilgi akışını düzenli, güvenli ve hızlı bir şekilde yönetilebilen bir
+öğrenci bilgi sistemi geliştirmektir.Günümüzde eğitim süreçlerinin büyük bölümü veri odaklı yürütülmektedir.Öğrenci kayıtları,ders atamaları, not işlemleri 
+ve devamsızlık takibi gibi işlemlerin manuel yöntemlerle yürütülmesi zaman kaybına ve hata riskine yol açmaktadır.
+Sistem sayesinde öğrencilerin akademik bilgileri, ders kayıtları, notları, devamsızlık bilgileri ve kişisel verileri merkezi 
+bir veritabanında saklanacak ve yetkilendirilmiş kullanıcılar tarafından erişilebilir olacaktır.Böylece veri güvenliği ve bütünlüğü korunacaktır.
+
+2.Projenin Kapsamı
+Proje, eğitim kurumlarında ihtiyaç duyulan temel akademik ve idari işlemleri kapsayacak şekilde tasarlanmıştır. Sistem aşağıdaki ana modüllerden oluşacaktır:
+Proje aşağıdaki temel hizmetleri sunacaktır.
+
+2.1 Öğrenci İşlemleri
+* Öğrenci kayıt oluşturma.
+* Öğrenci bilgilerini güncelleme. 
+* Öğrenci silme.
+* Öğrenci listeleme.
+* Öğrenciye ait dersleri görüntüleme.
+* Not ve devamsızlık bilgilerini görüntüleme.
+
+2.2 Öğretmen İşlemleri 
+* Öğretmen kayıt oluşturma.
+* Öğretmen bilgilerini güncelleme.
+* Öğretmen silme.
+* Öğretmene ders atama.
+* Öğrenci notu girme.
+* Devamsızlık bilgisi girme.
+
+2.3 Ders İşlemleri
+* Ders oluşturma.
+* Ders güncelleme.
+* Ders silme.
+* Derslere öğretmen atama.
+* Derslere öğrenci kaydetme.
+
+2.4 Not ve değerlendirme sistemi
+* Vize ve final notlarının girilmesi.
+* Ortalama hesaplama.
+* Harf notu hesaplama.
+* Başarılı / başarısız durumunun belirlenmesi.
+
+
+2.5 Yetkilendirme ve güvenlik
+* Admin, öğretmen ve öğrenci rolleri.
+* Rol bazlı erişim kontrolü.
+* Şifreli giriş sistemi.
+* Yetkisiz erişimlerin engellenmesi.
+* Veri güvenliği ve bütünlüğünün sağlanması.
+
+3. Teknik Altyapı
+ Proje, SQL tabanlı ilişkisel bir veritabanı kullanılarak geliştirilecektir.
+Veritabanı tasarımında tablo ilişkileri doğru şekilde modellenerek veri bütünlüğü sağlanacaktır.
+
+Sistemde aşağıdaki teknik yapılar kullanılacaktır:
+
+* CRUD işlemleri (Create, Read, Update, Delete)
+
+* Foreign Key kullanımı ile tablolar arası ilişkiler
+
+* JOIN sorguları ile veri birleştirme
+
+* Rol bazlı kullanıcı yönetimi
+
+* Veri bütünlüğü kısıtlamaları (constraint yapıları)
+
+Veritabanında bulunması planlanan temel tablolar:
+* Öğrenciler 
+* Öğretmenler 
+* Dersler
+* Notlar
+* Devamsızlık
+* Kullanıcılar
+
+Tablolar arasında bire-çok (one-to-many) ilişkiler kurulacaktır. Örneğin:
+* Bir öğretmen birden fazla ders verebilir.
+
+* Bir öğrenci birden fazla ders alabilir.
+
+* Bir ders için birden fazla not kaydı bulunabilir.
+
+Bu yapı sayesinde sistem hem tutarlı hem de genişletilebilir bir mimariye sahip olacaktır.
+
+4. Projenin sağlayacağı faydalar 
+Bu sistem sayesinde:
+* Manuel evrak yükü azalacaktır.
+
+* Bilgilere hızlı ve güvenli erişim sağlanacaktır.
+
+* Not hesaplama hataları minimize edilecektir.
+
+* Yetkilendirme sistemi sayesinde veri güvenliği artırılacaktır.
+
+* Raporlama ve analiz işlemleri kolaylaşacaktır.
+
+5. Sonuç
+ Bu Öğrenci Bilgi Sistemi projesi, ilişkisel veritabanı tasarımı, SQL sorguları, veri bütünlüğü ve sistem analizi
+konularında uygulamalı deneyim kazandırmayı hedeflemektedir. Proje; gerçek bir eğitim kurumu senaryosu üzerinden tasarlanarak hem teknik hem de analitik becerileri geliştirmeyi amaçlamaktadır. Bu çalışma sayesinde veritabanı modelleme, tablo ilişkileri kurma, karmaşık sorgular yazma ve sistematik düşünme yetkinlikleri geliştirilecektir.
+
+
+
+
+
