@@ -1,4 +1,4 @@
-                                                          ÖĞRENCİ BİLGİ SİSTEMİ PROJESİ 
+                                                  ÖĞRENCİ BİLGİ SİSTEMİ PROJESİ 
 Proje Hizmet Tanımı Ve Kapsamı
 1.Proje Amacı
  Bu projenin amacı; eğitim kurumlarında öğrenci, öğretmen ve idari  personel arasındaki bilgi akışını düzenli, güvenli ve hızlı bir şekilde yönetilebilen bir
