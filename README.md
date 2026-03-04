@@ -1,4 +1,4 @@
-                                                ÖĞRENCİ BİLGİ SİSTEMİ PROJESİ 
+                                                          ÖĞRENCİ BİLGİ SİSTEMİ PROJESİ 
 1.Genel Tanım
  Öğrenci Bilgi Sistemi, eğitim kurumlarında öğrenci, öğretmen ve idari  personel arasındaki akademik süreçlerin düzenli, güvenli ve sistemli bir şekilde yürütülmesini sağlamak amacıyla tasarlanmıştır. Sistem, tüm kullanıcıların ihtiyaç duydukları bilgilere hızlı ve kolay bir şekilde erişebilmelerini mümkün kılar. Günümüzde eğitim süreçlerinin büyük bölümü veri odaklı yürütülmektedir.Öğrenci kayıtları,ders atamaları, not işlemleri ve devamsızlık takibi gibi işlemlerin manuel yöntemlerle yürütülmesi zaman kaybına ve hata riskine yol açmaktadır.
 Sistem sayesinde öğrencilerin akademik bilgileri, ders kayıtları, notları, devamsızlık bilgileri ve kişisel verileri merkezi 
@@ -34,4 +34,3 @@ Dönem başında yönetici gerekli tanımlamaları yaparak sistemi hazır hale g
 
 
 
-                                               
