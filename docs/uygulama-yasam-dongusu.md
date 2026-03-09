@@ -1,8 +1,8 @@
-                                                          ÖĞRENCİ BİLGİ SİSTEMİ PROJESİ 
+
 1. Uygulama Yaşam Döngüsü
 Uygulamanın yaşam döngüsü, akademik dönem başlamadan önce yapılan sistem hazırlıkları ile başlar. Bu aşamada yönetici tarafından sistem altyapısı kontrol edilir, kullanıcı tanımlamaları yapılır ve döneme ait ders planlamaları sisteme girilir. Böylece sistem aktif kullanıma hazır hale getirilir.
 
-2. Sisteme Giriş Ve Genel İşleyiş
+2. Sisteme Giriş ve Genel İşleyiş
  Kullanıcılar kendilerine tanımlanan kullanıcı adı ve şifre ile sisteme giriş yapar. Giriş yaptıktan sonra sistem, kullanıcının rolüne göre özel bir ana sayfa açar ve kişi kendi rolüne uygun işlemleri görüntüler. Sistem, akademik dönemin başından sonuna kadar tüm süreçlerin belirli bir düzen içerisinde ilerlemesini sağlar.
 
 3. Yönetici Kullanım Süreci 
