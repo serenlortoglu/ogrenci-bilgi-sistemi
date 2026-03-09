@@ -1,0 +1,32 @@
+services:
+  oracleservice:
+    container_name: calismaoraclecontainer
+    build:
+      context: ./database/oracle
+      dockerfile: oracleDockerfile
+    ports:
+      - "1522:1521" # change host port if desired, e.g. "4000:1521"
+    environment:
+      # SYS/SYSTEM admin password (official image expects ORACLE_PWD)
+      - ORACLE_PWD=${ORACLE_PASSWORD}
+      # Pluggable database/service name (official: ORACLE_PDB)
+      - ORACLE_PDB=${ORACLE_DB}
+      - ORACLE_USER=${ORACLE_USER}
+      - ORACLE_PASSWORD=${ORACLE_PASSWORD}
+    volumes:
+      - calismaoracle_data:/opt/oracle/oradata
+      - ./database/oracle/init:/opt/oracle/scripts/setup:ro
+      - ./database/oracle/init:/opt/oracle/scripts/startup:ro
+    networks:
+      - initial_network
+    restart: unless-stopped
+
+networks:
+  initial_network:
+    driver: bridge
+
+volumes:
+  calismaoracle_data:
+
+
+
