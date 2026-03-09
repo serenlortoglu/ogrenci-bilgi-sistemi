@@ -20,7 +20,21 @@ services:
     networks:
       - initial_network
     restart: unless-stopped
-
+  ords:
+    image: container-registry.oracle.com/database/ords:latest
+    container_name: ordscontainer
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: oracleservice
+      DB_PORT: 1521
+      DB_SERVICE: ${ORACLE_DB}
+      DB_USER: ${ORACLE_USER}
+      DB_PASSWORD: ${ORACLE_PASSWORD}
+    depends_on:
+      - oracleservice
+    networks:
+      - initial_network
 networks:
   initial_network:
     driver: bridge
