@@ -1,0 +1,41 @@
+services:
+  oracleservice:
+    container_name: calismaoraclecontainer
+    build:
+      context: ./database/oracle
+      dockerfile: Dockerfile
+    ports:
+      - "1522:1521"
+    environment:
+      ORACLE_PWD: ${ORACLE_PASSWORD}
+      ORACLE_PDB: ${ORACLE_DB}
+      ORACLE_USER: ${ORACLE_USER}
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+    volumes:
+      - calismaoracle_data:/opt/oracle/oradata
+      - ./database/oracle/init:/opt/oracle/scripts/setup:ro
+      - ./database/oracle/init:/opt/oracle/scripts/startup:ro
+    networks:
+      - initial_network
+    restart: unless-stopped
+
+  ords:
+    container_name: ordscontainer
+    build:
+      context: ./ords
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - oracleservice
+    environment:
+      ORDS_ADMIN_PASSWORD: ${ORACLE_PASSWORD}   
+    networks:
+      - initial_network
+
+networks:
+  initial_network:
+    driver: bridge
+
+volumes:
+  calismaoracle_data:
