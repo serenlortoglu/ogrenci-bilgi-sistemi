@@ -29,7 +29,7 @@ services:
     depends_on:
       - oracleservice
     environment:
-      ORDS_ADMIN_PASSWORD: ${ORACLE_PASSWORD}   
+      ORDS_ADMIN_PASSWORD: ${ORACLE_PASSWORD}
     networks:
       - initial_network
 
