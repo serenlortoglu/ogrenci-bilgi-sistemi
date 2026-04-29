@@ -29,14 +29,15 @@ begin
     dbms_output.put_line('User ${ORACLE_USER} not found. Creating user...');
     execute immediate 'create user ${ORACLE_USER} identified by "${ORACLE_PASSWORD}"';
     dbms_output.put_line('Granting privileges to ${ORACLE_USER}...');
-    execute immediate 'grant create session, create table, create sequence, create view to ${ORACLE_USER}';
+    execute immediate 'grant create session, create table, create sequence, create view, create procedure to ${ORACLE_USER}';
     execute immediate 'grant unlimited tablespace to ${ORACLE_USER}';
     dbms_output.put_line('User ${ORACLE_USER} created and privileges granted.');
   else
-    dbms_output.put_line('User ${ORACLE_USER} already exists. Ensuring privileges...');
-    execute immediate 'grant create session, create table, create sequence, create view to ${ORACLE_USER}';
+    dbms_output.put_line('User ${ORACLE_USER} already exists. Synchronizing password and privileges...');
+    execute immediate 'alter user ${ORACLE_USER} identified by "${ORACLE_PASSWORD}"';
+    execute immediate 'grant create session, create table, create sequence, create view, create procedure to ${ORACLE_USER}';
     execute immediate 'grant unlimited tablespace to ${ORACLE_USER}';
-    dbms_output.put_line('Privileges ensured for ${ORACLE_USER}.');
+    dbms_output.put_line('Password and privileges ensured for ${ORACLE_USER}.');
   end if;
 end;
 /

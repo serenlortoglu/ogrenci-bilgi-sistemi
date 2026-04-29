@@ -106,6 +106,21 @@ VALUES (2, 2, 1, 'ABSENT');
 
 COMMIT;
 
+SELECT * FROM USERS;
+SELECT * FROM STUDENTS;
+SELECT * FROM TEACHERS;
+SELECT * FROM COURSES;
+SELECT * FROM GRADES;
+SELECT * FROM ATTENDANCE;
+
+-------------------
+SELECT USER FROM dual;
+ALTER SESSION SET CONTAINER = FREEPDB1;
+GRANT CREATE PROCEDURE TO APP;
+
+DROP PROCEDURE REGISTER_USER;
+DROP PROCEDURE LOGIN_USER_PROC;
+
 CREATE OR REPLACE PROCEDURE REGISTER_USER(
     p_username IN VARCHAR2,
     p_password IN VARCHAR2,
@@ -131,6 +146,27 @@ BEGIN
 END;
 /
 
+DECLARE
+  v_id NUMBER;
+BEGIN
+  REGISTER_USER('testapi', '1234', 'student', v_id);
+  DBMS_OUTPUT.PUT_LINE('USER ID: ' || v_id);
+END;
+/
+
+SELECT * FROM USERS WHERE ID = 41;
+
+DECLARE
+  v_id NUMBER;
+BEGIN
+  REGISTER_USER('x', '1234', 'student', v_id);
+
+  IF v_id IS NOT NULL THEN
+    DBMS_OUTPUT.PUT_LINE('Kayıt başarılı');
+  END IF;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE LOGIN_USER_PROC(
     p_username IN VARCHAR2,
     p_password IN VARCHAR2,
@@ -150,6 +186,49 @@ EXCEPTION
         RAISE_APPLICATION_ERROR(-20002, 'Kullanıcı adı veya şifre yanlış');
 END;
 /
+
+
+DECLARE
+  v_id NUMBER;
+  v_role VARCHAR2(20);
+BEGIN
+  LOGIN_USER_PROC('testapi', '1234', v_id, v_role);
+  DBMS_OUTPUT.PUT_LINE('ID: ' || v_id);
+  DBMS_OUTPUT.PUT_LINE('ROLE: ' || v_role);
+END;
+/
+
+BEGIN  
+  ORDS.ENABLE_SCHEMA(
+    p_enabled => TRUE,
+    p_schema  => 'APP',
+    p_url_mapping_type => 'BASE_PATH',
+    p_url_mapping_pattern => 'student_api',
+    p_auto_rest_auth => FALSE
+  );
+
+  ORDS.DEFINE_MODULE(
+    p_module_name    => 'student_api_health',
+    p_base_path      => 'health/',
+    p_items_per_page => 0,
+    p_status         => 'PUBLISHED'
+  );
+
+  ORDS.DEFINE_TEMPLATE(
+    p_module_name => 'student_api_health',
+    p_pattern     => '.'
+  );
+
+  ORDS.DEFINE_HANDLER(
+    p_module_name => 'student_api_health',
+    p_pattern     => '.',
+    p_method      => 'GET',
+    p_source_type => ORDS.source_type_query_one_row,
+    p_source      => q'[select 'ok' as status, 'student_api' as schema_alias from dual]'
+  );
+END;
+/
+COMMIT;
 
 
 

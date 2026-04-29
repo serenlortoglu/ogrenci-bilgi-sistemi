@@ -5,17 +5,10 @@ USER root
 ENV ORDS_CONFIG=/etc/ords/config
 
 RUN mkdir -p /etc/ords/config
+COPY install.sh /opt/ords/install.sh
 
-RUN ords install \
-    --admin-user SYS \
-    --db-hostname oracleservice \
-    --db-port 1521 \
-    --db-servicename FREEPDB1 \
-    --feature-db-api true \
-    --log-folder /tmp \
-    --password-stdin <<EOF
-Str0ngPassw0rd1
-Str0ngPassw0rd1
-EOF
+RUN chmod +x /opt/ords/install.sh
 
-CMD ["serve"]
+ENTRYPOINT ["/bin/sh", "-c"]
+
+CMD ["/opt/ords/install.sh && exec ords --config /etc/ords/config serve"]

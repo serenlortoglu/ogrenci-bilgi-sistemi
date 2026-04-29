@@ -13,8 +13,21 @@ services:
       ORACLE_PASSWORD: ${ORACLE_PASSWORD}
     volumes:
       - calismaoracle_data:/opt/oracle/oradata
-      - ./database/oracle/init:/opt/oracle/scripts/setup:ro
-      - ./database/oracle/init:/opt/oracle/scripts/startup:ro
+      - ./database/oracle/init/01-create-app-user.sh:/opt/oracle/scripts/setup/01-create-app-user.sh:ro
+      - ./database/oracle/init/01-create-app-user.sh:/opt/oracle/scripts/startup/01-create-app-user.sh:ro
+      - ./database/oracle/init/02-setup-database.sh:/opt/oracle/scripts/startup/02-setup-database.sh:ro
+      - ./database/ogr.sql:/opt/oracle/scripts/custom/ogr.sql:ro
+      - ./database/ords.sql:/opt/oracle/scripts/custom/ords.sql:ro
+      - ./database/ords/sql:/opt/oracle/scripts/custom/ords/sql:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - |
+          printf "SET HEADING OFF FEEDBACK OFF PAGESIZE 0 VERIFY OFF ECHO OFF\nSELECT open_mode FROM v\$$pdbs WHERE name = UPPER('${ORACLE_DB}');\nEXIT\n" | sqlplus -s / as sysdba | grep -q "READ WRITE"
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     networks:
       - initial_network
     restart: unless-stopped
@@ -22,16 +35,30 @@ services:
   ords:
     container_name: ordscontainer
     build:
-      context: ./ords
+      context: ./database/ords
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
-      - oracleservice
+      oracleservice:
+        condition: service_healthy
     environment:
       ORDS_ADMIN_PASSWORD: ${ORACLE_PASSWORD}
+      ORDS_DB_HOSTNAME: oracleservice
+      ORDS_DB_PORT: 1521
+      ORDS_DB_SERVICE: ${ORACLE_DB}
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:8080/ords/_/db-api/stable/ >/dev/null || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 24
+      start_period: 10s
     networks:
       - initial_network
+
+
 
 networks:
   initial_network:
